@@ -9,6 +9,10 @@
 
 #include QMK_KEYBOARD_H
 
+#ifdef AUDIO_ENABLE
+  #include "audio.h"
+#endif
+
 /* Qwerty
  * ┌──────┬──────┬──────┬──────┬──────┬──────┬──────┐  ┌──────┬──────┬──────┬──────┬──────┬──────┬──────┐
  * │ GESC │   1  │   2  │   3  │   4  │   5  │   -  │  │   =  │   6  │   7  │   8  │   9  │   0  │ BkSp │
@@ -45,6 +49,7 @@ enum sol_keycodes {
     MENU_UP,
     MENU_DN,
     RGB_RST,
+    PLY_SNG,
 };
 
 #define FN       MO(_FN)
@@ -56,13 +61,48 @@ enum sol_keycodes {
 /* #define FN_CAPS  LT(_FN, KC_CAPS) */
 //#define RGB_ADJ  LT(_KP_RGB, RGB_TOG)
 
+#define E1M1_DOOM  \
+    Q__NOTE(_E3 ), \
+    Q__NOTE(_E3 ), \
+    Q__NOTE(_E4 ), \
+    Q__NOTE(_E3 ), \
+    Q__NOTE(_E3 ), \
+    Q__NOTE(_D4 ), \
+    Q__NOTE(_E3 ), \
+    Q__NOTE(_E3 ), \
+    Q__NOTE(_C4 ), \
+    Q__NOTE(_E3 ), \
+    Q__NOTE(_E3 ), \
+    Q__NOTE(_BF3), \
+    Q__NOTE(_E3 ), \
+    Q__NOTE(_E3 ), \
+    Q__NOTE(_B3 ), \
+    Q__NOTE(_C4 ), \
+    Q__NOTE(_E3 ), \
+    Q__NOTE(_E3 ), \
+    Q__NOTE(_E4 ), \
+    Q__NOTE(_E3 ), \
+    Q__NOTE(_E3 ), \
+    Q__NOTE(_D4 ), \
+    Q__NOTE(_E3 ), \
+    Q__NOTE(_E3 ), \
+    Q__NOTE(_C4 ), \
+    Q__NOTE(_E3 ), \
+    Q__NOTE(_E3 ), \
+    H__NOTE(_BF3),
+
+#ifdef AUDIO_ENABLE
+float my_button_song[][2] = SONG(CAMPANELLA);
+/* float my_button_song[][2] = SONG(E1M1_DOOM); */
+#endif
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_QWERTY] = LAYOUT(
         KC_ESC,   KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_MINS,                  KC_EQL,  KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC,
         KC_TAB,   KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_LBRC,                  KC_RBRC, KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSLS,
-        FN,       KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_LPRN,                  KC_RPRN, KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
-        KC_LSFT,  KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_LCBR,                  KC_RCBR, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
+        FN,       KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_CALC,                  KC_RPRN, KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
+        KC_LSFT,  KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    PLY_SNG,                  KC_RCBR, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
         KC_LCTL,  KC_LGUI, KC_LALT, MIRROR,  FN,      KC_SPC,  KC_PGDN, DEL_CTL, KC_ENT, KC_PGUP, SPC_CTL, FN,      KC_MINS, KC_EQL,  KC_RGUI, KC_RCTL,
 
         KC_VOLD, KC_VOLU, KC_VOLD, KC_VOLU, KC_VOLD, KC_VOLU,                                     KC_VOLD, KC_VOLU, KC_VOLD, KC_VOLU, KC_VOLD, KC_VOLU,
@@ -104,7 +144,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [_KP_RGB] = LAYOUT(
-        _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F11,                    XXXXXXX, XXXXXXX, KC_NUM,  KC_PSLS, KC_PAST, KC_PMNS, XXXXXXX, 
+        _______, KC_F10,  KC_F9,   KC_F8,   KC_F7,   KC_F6,   KC_F11,                    XXXXXXX, XXXXXXX, KC_NUM,  KC_PSLS, KC_PAST, KC_PMNS, XXXXXXX, 
         _______, RGB_SAD, RGB_VAI, RGB_SAI, RESET,   _______, _______,                   XXXXXXX, XXXXXXX, KC_P7,   KC_P8,   KC_P9,   KC_PPLS, XXXXXXX,
         _______, RGB_HUD, RGB_VAD, RGB_HUI, RGB_RST, _______, _______,                   XXXXXXX, XXXXXXX, KC_P4,   KC_P5,   KC_P6,   KC_PPLS, XXXXXXX,
         _______, RGB_SPD, _______, RGB_SPI, _______, _______, TCH_TOG,                   XXXXXXX, XXXXXXX, KC_P1,   KC_P2,   KC_P3,   KC_PENT, XXXXXXX,
@@ -139,6 +179,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 eeconfig_update_rgb_matrix_default();
             }
             return false;
+        case PLY_SNG:
+            if (record->event.pressed) {
+                #ifdef AUDIO_ENABLE
+                PLAY_SONG(my_button_song);
+                #endif
+            }
+            return false;
         case TCH_TOG:
             if (record->event.pressed) {
                 touch_encoder_toggle();
@@ -157,7 +204,7 @@ void render_layer_status(void) {
             oled_write_ln_P(PSTR("QWRTY"), false);
             break;
         case _MIRROR:
-            oled_write_ln_P(PSTR("flip<"), false);
+            oled_write_ln_P(PSTR("Miror"), false);
             break;
         case _FN:
             oled_write_ln_P(PSTR("FN   "), false);

@@ -192,9 +192,9 @@
 #ifndef MARIO_MUSHROOM
 #    define MARIO_MUSHROOM
 #endif
-#ifndef E1M1_DOOM
-#    define E1M1_DOOM
-#endif
+/* #ifndef E1M1_DOOM */
+/* #    define E1M1_DOOM */
+/* #endif */
 #ifndef DISNEY_SONG
 #    define DISNEY_SONG
 #endif
