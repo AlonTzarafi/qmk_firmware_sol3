@@ -12,6 +12,7 @@
 #include "rgb_matrix.h"
 
 // for memcpy
+#include <stdio.h>
 #include <string.h>
 #include <transactions.h>
 
