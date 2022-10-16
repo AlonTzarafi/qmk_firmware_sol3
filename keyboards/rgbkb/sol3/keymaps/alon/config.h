@@ -20,6 +20,8 @@
 // #define RGB_DISABLE_TIMEOUT 1200000
 #define RGB_DISABLE_WHEN_USB_SUSPENDED
 
+/* #define OLED_TIMEOUT 60000*20 */
+#define OLED_TIMEOUT 1200000
 
 /* #define VIA_EEPROM_LAYOUT_OPTIONS_SIZE 2 */
 /* // 224B per layer right now */
