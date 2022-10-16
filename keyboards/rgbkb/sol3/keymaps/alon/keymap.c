@@ -61,35 +61,35 @@ enum sol_keycodes {
 /* #define FN_CAPS  LT(_FN, KC_CAPS) */
 //#define RGB_ADJ  LT(_KP_RGB, RGB_TOG)
 
-#define E1M1_DOOM  \
-    Q__NOTE(_E3 ), \
-    Q__NOTE(_E3 ), \
-    Q__NOTE(_E4 ), \
-    Q__NOTE(_E3 ), \
-    Q__NOTE(_E3 ), \
-    Q__NOTE(_D4 ), \
-    Q__NOTE(_E3 ), \
-    Q__NOTE(_E3 ), \
-    Q__NOTE(_C4 ), \
-    Q__NOTE(_E3 ), \
-    Q__NOTE(_E3 ), \
-    Q__NOTE(_BF3), \
-    Q__NOTE(_E3 ), \
-    Q__NOTE(_E3 ), \
-    Q__NOTE(_B3 ), \
-    Q__NOTE(_C4 ), \
-    Q__NOTE(_E3 ), \
-    Q__NOTE(_E3 ), \
-    Q__NOTE(_E4 ), \
-    Q__NOTE(_E3 ), \
-    Q__NOTE(_E3 ), \
-    Q__NOTE(_D4 ), \
-    Q__NOTE(_E3 ), \
-    Q__NOTE(_E3 ), \
-    Q__NOTE(_C4 ), \
-    Q__NOTE(_E3 ), \
-    Q__NOTE(_E3 ), \
-    H__NOTE(_BF3),
+/* #define E1M1_DOOM  \ */
+/*     Q__NOTE(_E3 ), \ */
+/*     Q__NOTE(_E3 ), \ */
+/*     Q__NOTE(_E4 ), \ */
+/*     Q__NOTE(_E3 ), \ */
+/*     Q__NOTE(_E3 ), \ */
+/*     Q__NOTE(_D4 ), \ */
+/*     Q__NOTE(_E3 ), \ */
+/*     Q__NOTE(_E3 ), \ */
+/*     Q__NOTE(_C4 ), \ */
+/*     Q__NOTE(_E3 ), \ */
+/*     Q__NOTE(_E3 ), \ */
+/*     Q__NOTE(_BF3), \ */
+/*     Q__NOTE(_E3 ), \ */
+/*     Q__NOTE(_E3 ), \ */
+/*     Q__NOTE(_B3 ), \ */
+/*     Q__NOTE(_C4 ), \ */
+/*     Q__NOTE(_E3 ), \ */
+/*     Q__NOTE(_E3 ), \ */
+/*     Q__NOTE(_E4 ), \ */
+/*     Q__NOTE(_E3 ), \ */
+/*     Q__NOTE(_E3 ), \ */
+/*     Q__NOTE(_D4 ), \ */
+/*     Q__NOTE(_E3 ), \ */
+/*     Q__NOTE(_E3 ), \ */
+/*     Q__NOTE(_C4 ), \ */
+/*     Q__NOTE(_E3 ), \ */
+/*     Q__NOTE(_E3 ), \ */
+/*     H__NOTE(_BF3), */
 
 #ifdef AUDIO_ENABLE
 float my_button_song[][2] = SONG(CAMPANELLA);
