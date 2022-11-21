@@ -50,6 +50,7 @@ enum sol_keycodes {
     MENU_DN,
     RGB_RST,
     PLY_SNG,
+    PRP_SCR,
 };
 
 #define FN       MO(_FN)
@@ -57,6 +58,20 @@ enum sol_keycodes {
 #define KP_RGB   MO(_KP_RGB)
 #define SPC_CTL  MT(MOD_LCTL, KC_SPC)
 #define DEL_CTL  MT(MOD_LCTL, KC_DEL)
+
+#define ENC_UP   KC_WH_U
+#define ENC_DN   KC_WH_D
+#define ENC_TUP  KC_PGUP
+#define ENC_TMD  PRP_SCR
+#define ENC_TDN  KC_PGDN
+
+#define EN2_UP   KC_VOLU
+#define EN2_DN   KC_VOLD
+#define EN2_TUP  KC_MPRV
+#define EN2_TMD  KC_MPLY
+#define EN2_TDN  KC_MNXT
+
+
 /* #define QWERTY   DF(_QWERTY) */
 /* #define FN_CAPS  LT(_FN, KC_CAPS) */
 //#define RGB_ADJ  LT(_KP_RGB, RGB_TOG)
@@ -96,6 +111,7 @@ float my_button_song[][2] = SONG(CAMPANELLA);
 /* float my_button_song[][2] = SONG(E1M1_DOOM); */
 #endif
 
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_QWERTY] = LAYOUT(
@@ -105,8 +121,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_LSFT,  KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    PLY_SNG,                  KC_RCBR, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
         KC_LCTL,  KC_LGUI, KC_LALT, MIRROR,  FN,      KC_SPC,  KC_PGDN, DEL_CTL, KC_ENT, KC_PGUP, SPC_CTL, FN,      KC_MINS, KC_EQL,  KC_RGUI, KC_RCTL,
 
-        KC_VOLD, KC_VOLU, KC_VOLD, KC_VOLU, KC_VOLD, KC_VOLU,                                     KC_VOLD, KC_VOLU, KC_VOLD, KC_VOLU, KC_VOLD, KC_VOLU,
-        KC_VOLD, KC_VOLU, KC_MNXT, KC_MPLY, KC_MPRV,                                                       KC_VOLD, KC_VOLU, KC_MNXT, KC_MPLY, KC_MPRV
+        KC_VOLD, KC_VOLU, KC_VOLD, KC_VOLU, KC_VOLD, KC_VOLU,                                     ENC_DN,  ENC_UP,  ENC_DN,  ENC_UP,  ENC_DN,  ENC_UP,
+        KC_VOLD, KC_VOLU, KC_MNXT, KC_MPLY, KC_MPRV,                                                       ENC_DN,  ENC_UP,  ENC_TDN, ENC_TMD, ENC_TUP
     ),
     
     /* [_QWERTY] = LAYOUT( */
@@ -128,8 +144,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, KC_MPRV, KC_MNXT, KC_MPLY, KC_VOLD, KC_VOLU, _______,                   _______, _______, _______, _______, _______, _______, _______,
         _______, _______, _______, KP_RGB,  _______,  KC_ENT,  _______, _______, _______, RESET,   _______, _______, KC_VOLD, KC_VOLU, _______, _______,
 
-        _______, _______, _______, _______, _______, _______,                                     _______, _______, _______, _______, _______, _______,
-        _______, _______, _______, _______, _______,                                                       _______, _______, _______, _______, _______
+        _______, _______, _______, _______, _______, _______,                                     EN2_DN,  EN2_UP,  EN2_DN,  EN2_UP,  EN2_DN,  EN2_UP,
+        _______, _______, _______, _______, _______,                                                       EN2_DN,  EN2_UP,  EN2_TDN, EN2_TMD, EN2_TUP
     ),
 
     [_MIRROR] = LAYOUT(
@@ -148,7 +164,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, RGB_SAD, RGB_VAI, RGB_SAI, RESET,   _______, _______,                   XXXXXXX, XXXXXXX, KC_P7,   KC_P8,   KC_P9,   KC_PPLS, XXXXXXX,
         _______, RGB_HUD, RGB_VAD, RGB_HUI, RGB_RST, _______, _______,                   XXXXXXX, XXXXXXX, KC_P4,   KC_P5,   KC_P6,   KC_PPLS, XXXXXXX,
         _______, RGB_SPD, _______, RGB_SPI, _______, _______, TCH_TOG,                   XXXXXXX, XXXXXXX, KC_P1,   KC_P2,   KC_P3,   KC_PENT, XXXXXXX,
-        _______, RGB_RMOD,RGB_TOG, RGB_MOD, _______, _______, _______, _______, XXXXXXX, XXXXXXX, XXXXXXX, KC_P0,   KC_PDOT, KC_NLCK, KC_PENT, XXXXXXX,
+        RGB_TOG, RGB_RMOD,RGB_MOD, _______, _______, _______, _______, _______, XXXXXXX, XXXXXXX, XXXXXXX, KC_P0,   KC_PDOT, KC_NLCK, KC_PENT, XXXXXXX,
 
         _______, _______, _______, _______, _______, _______,                                     _______, _______, _______, _______, _______, _______,
         _______, _______, _______, _______, _______,                                                       _______, _______, _______, _______, _______
@@ -184,6 +200,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 #ifdef AUDIO_ENABLE
                 PLAY_SONG(my_button_song);
                 #endif
+            }
+            return false;
+        case PRP_SCR:
+            if (record->event.pressed) {
+                int i;
+                for (i = 0; i < 30; i++) {
+                    tap_code(KC_MS_U);
+                    tap_code(KC_MS_R);
+                }
+                for (i = 0; i < 5; i++) {
+                    tap_code(KC_MS_L);
+                }
+                for (i = 0; i < 10; i++) {
+                    tap_code(KC_MS_D);
+                }
             }
             return false;
         case TCH_TOG:

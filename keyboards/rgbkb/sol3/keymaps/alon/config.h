@@ -32,3 +32,10 @@
 
 #define STM32_ONBOARD_EEPROM_SIZE 2048
 
+/* #define MK_3_SPEED */
+/* #define MK_C_INTERVAL_2 8 */
+
+/* Larger steps for cursor: (Really only happens when automated by special key) */
+#define MOUSEKEY_MOVE_DELTA 50
+/* Disables acceleration for mouse cursor: */
+#define MOUSEKEY_TIME_TO_MAX 0
