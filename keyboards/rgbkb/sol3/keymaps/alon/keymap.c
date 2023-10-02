@@ -64,7 +64,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,   KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    MU_NEXT,                  KC_RBRC, KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSLS,
         FN,       KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_LPRN,                  KC_RPRN, KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
         KC_LSFT,  KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_LCBR,                  KC_RCBR, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
-        KC_LCTL,  KC_LGUI, KC_LALT, MIRROR,  FN,      KC_SPC,  KC_PGDN, CTL_DEL, KC_ENT, KC_PGUP, KC_ENT,  FN,      KC_MINS, KC_EQL,  KC_RGUI, KC_RCTL,
+        KC_LCTL,  KC_LGUI, KC_LALT, MIRROR,  FN,      KC_SPC,  KC_PGDN, CTL_DEL, KC_ENT, KC_PGUP, KC_SPC,  FN,      KC_MINS, KC_EQL,  KC_RGUI, KC_RCTL,
 
         KC_VOLD, KC_VOLU, KC_MNXT, KC_MPLY, KC_MPRV,                                                       KC_VOLD, KC_VOLU, KC_MNXT, KC_MPLY, KC_MPRV
     ),
@@ -81,7 +81,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_FN] = LAYOUT(
         KC_GRAVE,KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   _______,                   KC_F12,  KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_DEL,
-        _______, KC_PGUP, KC_UP,   KC_PGDN, KC_F11,  KC_F12,  _______,                   _______, _______, KC_PGUP, KC_UP,   KC_PGDN, KC_PSCR, _______,
+        _______, KC_PGUP, KC_UP,   KC_PGDN, KC_F11,  KC_F12,  _______,                   _______, _______, KC_PGUP, KC_UP,   KC_PGDN, KC_LBRC, KC_RBRC,
         KC_HOME, KC_LEFT, KC_DOWN, KC_RGHT, KC_END,  _______, _______,                   _______, KC_HOME, KC_LEFT, KC_DOWN, KC_RGHT, KC_END,  _______,
         _______, KC_MPRV, KC_MNXT, KC_MPLY, KC_VOLD, KC_VOLU, _______,                   _______, _______, _______, _______, _______, _______, _______,
         _______, KC_APP,  _______, RGB,     _______, KC_ENT,  _______, KC_INS,  _______, QK_BOOT, _______, _______, KC_VOLD, KC_VOLU, _______, _______,
@@ -90,10 +90,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [_RGB] = LAYOUT(
-        _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F11,                    KC_F12,  KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  _______,
-        _______, RGB_SAD, RGB_VAI, RGB_SAI, QK_BOOT, _______, _______,                   _______, _______, KC_P7,   KC_P8,   KC_P9,   _______, _______,
-        _______, RGB_HUD, RGB_VAD, RGB_HUI, RGB_RST, _______, DM_REC1,                   _______, _______, KC_P4,   KC_P5,   KC_P6,   _______, _______,
-        _______, RGB_SPD, _______, RGB_SPI, _______, _______, DM_RSTP,                   _______, _______, KC_P1,   KC_P2,   KC_P3,   _______, _______,
+        _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F11,                    _______, _______, KC_NUM,  _______, _______, _______, _______,
+        _______, RGB_SAD, RGB_VAI, RGB_SAI, QK_BOOT, _______, _______,                   _______, _______, KC_P7,   KC_P8,   KC_P9,   KC_PSCR, _______,
+        KC_CAPS, RGB_HUD, RGB_VAD, RGB_HUI, RGB_RST, _______, DM_REC1,                   _______, _______, KC_P4,   KC_P5,   KC_P6,   KC_SCRL, _______,
+        _______, RGB_SPD, _______, RGB_SPI, _______, _______, DM_RSTP,                   _______, _______, KC_P1,   KC_P2,   KC_P3,   KC_PAUS, _______,
         RGB_TOG, RGB_RMOD,RGB_MOD, _______, _______, _______, _______, _______, _______, _______, _______, KC_P0,   KC_PDOT, KC_NUM,  _______, _______,
 
         _______, _______, _______, _______, _______,                                                       _______, _______, _______, _______, _______
